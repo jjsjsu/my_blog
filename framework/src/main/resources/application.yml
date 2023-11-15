@@ -1,0 +1,29 @@
+server:
+  port: 80
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/sg_blog
+  servlet:
+    multipart:
+      max-request-size: 20MB
+      max-file-size: 20MB
+mybatis-plus:
+  configuration:
+    # 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除的字段
+      logic-delete-field: delFlag
+      # 代表已删除的值
+      logic-delete-value: 1
+      # 代表未删除的值
+      logic-not-delete-value: 0
+      # 主键自增策略，以mysql数据库为准
+      id-type: auto
+logging:
+  level:
+    root: debug
