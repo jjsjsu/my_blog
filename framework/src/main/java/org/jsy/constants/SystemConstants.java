@@ -23,9 +23,15 @@ public class SystemConstants {
      * 文章列表每页显示的数据条数
      */
     public static final int ARTICLE_STATUS_SIZE = 10;
+
     /**
-     * 表示表的分类状态为正常
+     * 分类表的分类状态是正常状态
      */
-    public static final String STATUS_NORMAL="0";
+    public static final String STATUS_NORMAL = "0";
+
+    /**
+     * 友链状态为审核通过
+     */
+    public static final String LINK_STATUS_NORMAL = "0";
 
 }

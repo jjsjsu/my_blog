@@ -26,7 +26,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper,Category> im
     @Override
     public ResponseResult getCategoryList() {
         LambdaQueryWrapper<Article> articleWrapper=new LambdaQueryWrapper<>();
-        //要求查的是getStatus字段的值为1，注意SystemCanstants是我们写的一个常量类，用来解决字面值的书写问题
+        //要求查的是getStatus字段的值为1，注意SystemConstants是我们写的一个常量类，用来解决字面值的书写问题
         articleWrapper.eq(Article::getStatus,SystemConstants.ARTICLE_STATUS_NORMAL);
         //查询文章列表，条件就是上一行的articleWrapper
         List<Article> articleList=articleService.list(articleWrapper);

@@ -108,7 +108,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             articleDetailVo.setCategoryName(category.getName());
         }
 
-        //封装响应返回。ResponseResult是我们在huanf-framework工程的domain目录写的实体类
+        //封装响应返回。o
         return ResponseResult.okResult(articleDetailVo);
     }
 }
