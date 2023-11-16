@@ -2,6 +2,7 @@ package org.jsy.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.injector.methods.SelectById;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
@@ -9,11 +10,13 @@ import org.jsy.constants.SystemConstants;
 import org.jsy.domain.Article;
 import org.jsy.domain.Category;
 import org.jsy.domain.ResponseResult;
+import org.jsy.enums.AppHttpCodeEnum;
 import org.jsy.mapper.ArticleMapper;
 import org.jsy.service.ArticleService;
 
 import org.jsy.service.CategoryService;
 import org.jsy.utils.BeanCopyUtils;
+import org.jsy.vo.ArticleDetailVO;
 import org.jsy.vo.ArticleListVO;
 import org.jsy.vo.HotArticleVO;
 import org.jsy.vo.PageVO;
@@ -87,5 +90,25 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         PageVO pageVO=new PageVO(articleListVOS,page.getTotal());
         return ResponseResult.okResult(pageVO);
 
+    }
+
+    @Override
+    public ResponseResult getArticleDetail(Long id) {
+        //根据id查询文章
+        Article article = getById(id);
+
+        //把最后的查询结果封装成ArticleListVo(我们写的实体类)。BeanCopyUtils是我们写的工具类
+        ArticleDetailVO articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVO.class);
+
+        //根据分类id，来查询分类名
+        Long categoryId = articleDetailVo.getCategoryId();
+        Category category = categoryService.getById(categoryId);
+        //如果根据分类id查询的到分类名，那么就把查询到的值设置给ArticleDetailVo实体类的categoryName字段
+        if(category!=null){
+            articleDetailVo.setCategoryName(category.getName());
+        }
+
+        //封装响应返回。ResponseResult是我们在huanf-framework工程的domain目录写的实体类
+        return ResponseResult.okResult(articleDetailVo);
     }
 }

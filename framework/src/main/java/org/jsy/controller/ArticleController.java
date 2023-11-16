@@ -8,6 +8,7 @@ import org.jsy.mapper.ArticleMapper;
 import org.jsy.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,12 @@ public class ArticleController {
     }
     //分类获取文章列表
     @GetMapping("/articleList")
-    public ResponseResult articleList(Integer pageNum,Integer pageSize,Long categoryId)
-    {
+    public ResponseResult articleList(Integer pageNum,Integer pageSize,Long categoryId) {
         return service.articleList(pageNum,pageSize,categoryId);
+    }
+    @GetMapping("/{id}")
+    public ResponseResult articleDetail(@PathVariable Long id){
+        //根据id查询文章详情
+        return service.getArticleDetail(id);
     }
 }
