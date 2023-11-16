@@ -10,7 +10,7 @@ import org.jsy.mapper.CategoryMapper;
 import org.jsy.service.ArticleService;
 import org.jsy.service.CategoryService;
 import org.jsy.utils.BeanCopyUtils;
-import org.jsy.vo.CategoryVo;
+import org.jsy.vo.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper,Category> im
                 .filter(category -> SystemConstants.STATUS_NORMAL.equals(category.getStatus()))
                 .collect(Collectors.toList());
         //封装成CategoryVo实体类后返回给前端，CategoryVo的作用是只返回前端需要的字段。BeanCopyUtils是我们写的工具类
-        List<CategoryVo> categoryVos=BeanCopyUtils.copyBeanList(categoryList, CategoryVo.class);
+        List<CategoryVO> categoryVos=BeanCopyUtils.copyBeanList(categoryList, CategoryVO.class);
 
         return ResponseResult.okResult(categoryVos);
     }

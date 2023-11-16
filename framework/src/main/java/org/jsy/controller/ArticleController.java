@@ -23,9 +23,15 @@ public class ArticleController {
     public List<Article> test(){
         return service.list();
     }
-    //测试统一响应格式
+    //获取当前热门文章
     @GetMapping("/hotArticleList")
     public ResponseResult<Article> hotArticleList(){
         return service.hotArticleList();
+    }
+    //分类获取文章列表
+    @GetMapping("/articleList")
+    public ResponseResult articleList(Integer pageNum,Integer pageSize,Long categoryId)
+    {
+        return service.articleList(pageNum,pageSize,categoryId);
     }
 }

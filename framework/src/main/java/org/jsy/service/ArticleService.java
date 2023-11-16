@@ -6,5 +6,8 @@ import org.jsy.domain.ResponseResult;
 import org.springframework.stereotype.Service;
 
 public interface ArticleService extends IService<Article> {
-    ResponseResult<Article> hotArticleList();
+    //查询热度比较高的文章
+    ResponseResult hotArticleList();
+    //分类查询文章列表
+    ResponseResult articleList(Integer pageNUM,Integer pageSize,Long categoryId);
 }
